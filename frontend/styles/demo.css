@@ -1,0 +1,12 @@
+
+.demo-pre-wrap {
+    white-space: pre-wrap !important;
+}
+
+.demo-fixed-width {
+    font-family: "Courier New", Courier, monospace !important;
+}
+
+.demo-small-font {
+    font-size: 12px !important;
+}

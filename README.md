@@ -1,2 +1,2 @@
 # dellroad-stuff-vaadin-demo
-Demonstration of DellRoad Stuff classes for Vaadin.
+Demonstration of some of the DellRoad Stuff classes for Vaadin.

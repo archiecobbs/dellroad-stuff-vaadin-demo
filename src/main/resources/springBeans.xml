@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:task="http://www.springframework.org/schema/task"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xmlns:p="http://www.springframework.org/schema/p"
+  xsi:schemaLocation="
+   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+   http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+   http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- Activate Spring annotation support -->
+    <context:annotation-config/>
+
+    <!-- Activate @Configurable -->
+    <context:spring-configured/>
+
+    <!-- Define an application-wide "Springleton", which is required for the SimpleSpringServlet to find us -->
+    <bean id="springleton" class="org.dellroad.stuff.vaadin22.demo.Springleton"/>
+
+    <!-- What-to-do-when-queue-full policy -->
+    <bean id="rejectedExecutionAbort" class="java.util.concurrent.ThreadPoolExecutor.AbortPolicy"/>
+
+    <!-- Define our task executor and scheduler -->
+    <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor"
+      p:corePoolSize="16" p:maxPoolSize="32" p:queueCapacity="10000" p:rejectedExecutionHandler-ref="rejectedExecutionAbort"/>
+    <bean id="taskScheduler" class="org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler" p:poolSize="8"/>
+
+    <!-- Substitute ${properties.like.this} in this application context -->
+    <context:property-placeholder location="classpath:demo.properties"/>
+
+    <!-- Scan classpath for other beans -->
+    <context:component-scan base-package="org.dellroad.stuff.vaadin22.demo"/>
+
+</beans>
