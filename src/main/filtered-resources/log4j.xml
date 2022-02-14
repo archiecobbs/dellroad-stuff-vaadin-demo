@@ -38,7 +38,11 @@
     </logger>
 
     <logger name="org.springframework">
-        <level value="debug"/>
+        <level value="info"/>
+    </logger>
+
+    <logger name="com.vaadin.flow.server.communication.UidlWriter">
+        <level value="info"/>
     </logger>
 
 <!--

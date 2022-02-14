@@ -47,12 +47,12 @@ public enum Country {
 
 // Defaults for FieldBuilder fields
 
-    @FieldBuilder.Default("itemLabelGenerator")
+    @FieldBuilder.FieldDefault("itemLabelGenerator")
     private static ItemLabelGenerator<Country> itemLabelGenerator() {
         return Country::getName;
     }
 
-    @FieldBuilder.Default("renderer")
+    @FieldBuilder.FieldDefault("renderer")
     private static ComponentRenderer<HorizontalLayout, Country> renderer() {
         return new ComponentRenderer<HorizontalLayout, Country>(country -> {
             final HorizontalLayout layout = new HorizontalLayout();
@@ -61,12 +61,5 @@ public enum Country {
             layout.add(new Text(country.getName()));
             return layout;
         });
-    }
-
-// Object
-
-    @Override
-    public String toString() {
-        return this.name;
     }
 }

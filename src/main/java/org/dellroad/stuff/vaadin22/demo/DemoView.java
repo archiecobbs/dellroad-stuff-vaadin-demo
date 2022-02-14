@@ -7,7 +7,6 @@ package org.dellroad.stuff.vaadin22.demo;
 
 import com.google.common.base.Preconditions;
 import com.vaadin.flow.component.Text;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.CssImport;
@@ -19,8 +18,9 @@ import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.ValidationException;
+import com.vaadin.flow.data.binder.ValidationResult;
 import com.vaadin.flow.dom.ElementConstants;
 import com.vaadin.flow.router.PreserveOnRefresh;
 import com.vaadin.flow.router.Route;
@@ -36,9 +36,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 
-/**
- * Superclass of the various {@link UI}s that constitute the GUI.
- */
 @Configurable(preConstruction = true)
 @CssImport("./styles/demo.css")
 @PreserveOnRefresh
@@ -51,7 +48,8 @@ public class DemoView extends VerticalLayout {
     @Autowired
     protected SessionSingleton sessionSingleton;
 
-    private Binder<Person> binder;
+    private BeanValidationBinder<Person> binder;
+    private Notification errorNotification;
 
     public DemoView() {
 
@@ -60,7 +58,7 @@ public class DemoView extends VerticalLayout {
 
         // Setup binder
         final FieldBuilder<Person> fieldBuilder = this.sessionSingleton.newFieldBuilder(Person.class);
-        this.binder = new Binder<>(Person.class);
+        this.binder = new BeanValidationBinder<>(Person.class);
         fieldBuilder.bindFields(this.binder);
 
         // Build form
@@ -78,23 +76,38 @@ public class DemoView extends VerticalLayout {
 
     private void resetForm() {
         this.log.info("DemoView: form reset");
+        this.resetErrorNotification();
         this.binder.readBean(new Person());
     }
 
     private void submitForm() {
         this.log.info("DemoView: form submitted");
+        this.resetErrorNotification();
         final Person person = new Person();
         try {
             this.binder.writeBean(person);
         } catch (ValidationException e) {
             this.log.error("DemoView: validation errors:\n    {}",
-              e.getValidationErrors().stream().map(Object::toString).collect(Collectors.joining("\n    ")));
-            this.notify(NotificationVariant.LUMO_ERROR, Notification.Position.MIDDLE, 0, "Validation Error",
-              e.getValidationErrors().stream().map(Object::toString).toArray(String[]::new));
+              Stream.of(this.toStrings(e)).collect(Collectors.joining("\n    ")));
+            this.errorNotification = this.notify(NotificationVariant.LUMO_ERROR,
+              Notification.Position.MIDDLE, 0, "Validation Error", this.toStrings(e));
             return;
         }
         this.notify(NotificationVariant.LUMO_SUCCESS, Notification.Position.BOTTOM_END, 3000, "Successful Submission");
         this.log.info("DemoView: validation successful; result: {}", person);
+    }
+
+    private void resetErrorNotification() {
+        if (this.errorNotification != null) {
+            this.errorNotification.close();
+            this.errorNotification = null;
+        }
+    }
+
+    private String[] toStrings(ValidationException e) {
+        return e.getValidationErrors().stream()
+          .map(ValidationResult::getErrorMessage)
+          .toArray(String[]::new);
     }
 
     /**
@@ -107,7 +120,7 @@ public class DemoView extends VerticalLayout {
      * @param details extra message(s), or null
      * @throws IllegalArgumentException if any parameter other than {@code details} is null
      */
-    private void notify(NotificationVariant variant,
+    private Notification notify(NotificationVariant variant,
       Notification.Position position, int duration, String message, String... details) {
 
         // Sanity check
@@ -150,5 +163,6 @@ public class DemoView extends VerticalLayout {
 
         // Display notification
         notification.open();
+        return notification;
     }
 }

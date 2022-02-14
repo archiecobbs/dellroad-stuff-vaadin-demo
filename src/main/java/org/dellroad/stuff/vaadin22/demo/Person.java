@@ -16,6 +16,7 @@ public class Person implements HasName {
     private String name;
     private LocalDate birthDate;
     private Vehicle vehicle;
+    private DateRange contract;
 
     @Override
     @FieldBuilder.FormLayout(order = 1)
@@ -28,7 +29,7 @@ public class Person implements HasName {
 
     @FieldBuilder.DatePicker
     @FieldBuilder.FormLayout(order = 2, label = "Birthday")
-    @NotNull
+    @FieldBuilder.NullifyCheckbox("Has birthday:")
     public LocalDate getBirthDate() {
         return this.birthDate;
     }
@@ -36,9 +37,8 @@ public class Person implements HasName {
         this.birthDate = birthDate;
     }
 
-    @FieldBuilder.FormLayout(order = 3)
-    @FieldBuilder.NullifyCheckbox("Has a vehicle")
-    @FieldBuilder.CustomField(implementation = VehicleCustomField.class)
+    @FieldBuilder.FormLayout(order = 3, label = "Vehicle")
+    @FieldBuilder.CustomField(implementation = VehicleField.class)
     public Vehicle getVehicle() {
         return this.vehicle;
     }
@@ -46,10 +46,21 @@ public class Person implements HasName {
         this.vehicle = vehicle;
     }
 
+    @FieldBuilder.FormLayout(order = 4, label = "Term")
+    @FieldBuilder.CustomField(implementation = DateRangeField.class)
+    @NotNull(message = "Term is required")
+    public DateRange getContract() {
+        return this.contract;
+    }
+    public void setContract(final DateRange contract) {
+        this.contract = contract;
+    }
+
 // Object
 
     @Override
     public String toString() {
-        return String.format("Person[name=\"%s\",birthDate=%s,vehicle=%s]", this.name, this.birthDate, this.vehicle);
+        return String.format("Person[name=\"%s\",birthDate=%s,vehicle=%s,contract=%s]",
+          this.name, this.birthDate, this.vehicle, this.contract);
     }
 }

@@ -20,16 +20,18 @@ import org.dellroad.stuff.vaadin22.fieldbuilder.FieldBuilder;
 public interface HasName {
 
     String PATTERN = "^[\\p{Alpha}]+( [\\p{Alpha}]+)*$";
-    int MAX_LENGTH = 32;
+    int MAX_LENGTH = 12;
 
+    @FieldBuilder.Binding(nullRepresentation = "")
+    @FieldBuilder.FormLayout(order = 0)
     @FieldBuilder.TextField(
       placeholder = "Name...",
       maxLength = MAX_LENGTH,
       pattern = PATTERN,
       required = true,
       requiredIndicatorVisible = true)
-    @NotNull
+    @NotNull(message = "Name is required")
     @Pattern(regexp = PATTERN, message = "Alphabetic words only")
-    @Size(max = MAX_LENGTH)
+    @Size(max = MAX_LENGTH, message = "At most 12 characters")
     String getName();
 }
