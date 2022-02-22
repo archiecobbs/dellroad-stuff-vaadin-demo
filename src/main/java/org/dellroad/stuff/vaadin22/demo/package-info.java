@@ -7,6 +7,6 @@
  * Classes for automatically building a {@link com.vaadin.flow.data.binder.Binder} and configuring and binding fields
  * declaratively using {@link FieldBuilder} annotations.
  *
- * @see org.dellroad.stuff.vaadin22.fieldbuilder.FieldBuilder
+ * @see org.dellroad.stuff.vaadin22.field.FieldBuilder
  */
 package org.dellroad.stuff.vaadin22.demo;

@@ -13,7 +13,7 @@ import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
 
-import org.dellroad.stuff.vaadin22.fieldbuilder.FieldBuilder;
+import org.dellroad.stuff.vaadin22.field.FieldBuilder;
 
 public enum Country {
     UNITED_STATES("us", "USA"),

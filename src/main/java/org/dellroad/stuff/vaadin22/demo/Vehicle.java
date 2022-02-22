@@ -7,7 +7,8 @@ package org.dellroad.stuff.vaadin22.demo;
 
 import javax.validation.constraints.NotNull;
 
-import org.dellroad.stuff.vaadin22.fieldbuilder.FieldBuilder;
+import org.dellroad.stuff.vaadin22.data.EnumDataProvider;
+import org.dellroad.stuff.vaadin22.field.FieldBuilder;
 
 public class Vehicle implements HasName {
 
@@ -25,7 +26,8 @@ public class Vehicle implements HasName {
     }
 
     @FieldBuilder.FormLayout(order = 1, colspan = 2)
-    @FieldBuilder.EnumComboBox(
+    @FieldBuilder.ComboBox(
+      items = EnumDataProvider.class,
       minWidth = "150px",
       placeholder = "Choose...",
       required = true,

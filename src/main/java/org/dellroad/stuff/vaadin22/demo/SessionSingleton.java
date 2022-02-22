@@ -11,7 +11,7 @@ import com.vaadin.flow.spring.scopes.VaadinSessionScope;
 
 import java.util.HashMap;
 
-import org.dellroad.stuff.vaadin22.fieldbuilder.FieldBuilder;
+import org.dellroad.stuff.vaadin22.field.FieldBuilder;
 import org.dellroad.stuff.vaadin22.util.VaadinUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;

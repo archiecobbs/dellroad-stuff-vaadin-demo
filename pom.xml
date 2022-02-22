@@ -6,8 +6,8 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
     <groupId>org.dellroad</groupId>
-    <artifactId>dellroad-stuff-vaadin22-demo</artifactId>
-    <version>2.5.0-SNAPSHOT</version>
+    <artifactId>dellroad-stuff-vaadin-demo</artifactId>
+    <version>1.0.0</version>
     <name>DellRoad Stuff Vaadin Demo Classes</name>
     <packaging>war</packaging>
     <description>Demonstration of DellRoad Stuff classes for Vaadin.</description>
@@ -39,7 +39,8 @@
         <!-- Dependency versions -->
         <aspectj.maven-plugin.version>1.11</aspectj.maven-plugin.version>
         <aspectj.version>[1.8.13,1.9)</aspectj.version>
-        <guava.version>29.0-jre</guava.version>
+        <dellroad-stuff.version>2.5.0-SNAPSHOT</dellroad-stuff.version>
+        <guava.version>31.0.1-jre</guava.version>
         <hibernate-validator.version>6.2.0.Final</hibernate-validator.version>
         <javax.el.version>3.0.1-b11</javax.el.version>
         <jetty.maven.plugin.version>9.4.45.v20220203</jetty.maven.plugin.version>
@@ -52,7 +53,7 @@
         <maven.war.plugin.version>3.3.2</maven.war.plugin.version>
         <servlet-api.version>4.0.1</servlet-api.version>
         <slf4j.version>1.7.35</slf4j.version>
-        <spring.version>5.3.15</spring.version>
+        <spring.version>5.3.16</spring.version>
         <vaadin.plugin.version>${vaadin.version}</vaadin.plugin.version>
         <vaadin.version.major>22</vaadin.version.major>
         <vaadin.version.minor>0</vaadin.version.minor>
@@ -86,20 +87,16 @@
                     <groupId>com.vaadin</groupId>
                     <artifactId>fusion-endpoint</artifactId>
                 </exclusion>
-            <!-- -->
                 <exclusion>
                     <groupId>com.vaadin</groupId>
                     <artifactId>vaadin-dev-server</artifactId>
                 </exclusion>
-            <!-- -->
             </exclusions>
         </dependency>
-    <!-- -->
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>flow-server-production-mode</artifactId>
         </dependency>
-    <!-- -->
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-spring</artifactId>
@@ -179,32 +176,17 @@
         <dependency>
             <groupId>org.dellroad</groupId>
             <artifactId>dellroad-stuff-main</artifactId>
-            <version>${project.version}</version>
+            <version>${dellroad-stuff.version}</version>
         </dependency>
         <dependency>
             <groupId>org.dellroad</groupId>
-            <artifactId>dellroad-stuff-vaadin22-components</artifactId>
-            <version>${project.version}</version>
+            <artifactId>dellroad-stuff-spring</artifactId>
+            <version>${dellroad-stuff.version}</version>
         </dependency>
         <dependency>
             <groupId>org.dellroad</groupId>
-            <artifactId>dellroad-stuff-vaadin22-fieldbuilder</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.dellroad</groupId>
-            <artifactId>dellroad-stuff-vaadin22-grid</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.dellroad</groupId>
-            <artifactId>dellroad-stuff-vaadin22-spring-servlet</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.dellroad</groupId>
-            <artifactId>dellroad-stuff-vaadin22-util</artifactId>
-            <version>${project.version}</version>
+            <artifactId>dellroad-stuff-vaadin22</artifactId>
+            <version>${dellroad-stuff.version}</version>
         </dependency>
 
         <!-- Misc utility -->

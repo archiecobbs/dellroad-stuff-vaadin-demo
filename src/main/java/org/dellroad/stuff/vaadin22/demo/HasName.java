@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import org.dellroad.stuff.vaadin22.fieldbuilder.FieldBuilder;
+import org.dellroad.stuff.vaadin22.field.FieldBuilder;
 
 /**
  * Implemented by classes that have a name.

@@ -8,7 +8,7 @@ package org.dellroad.stuff.vaadin22.demo;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
-import org.dellroad.stuff.vaadin22.fieldbuilder.FieldBuilder;
+import org.dellroad.stuff.vaadin22.field.FieldBuilder;
 
 @SuppressWarnings("serial")
 public class VehicleField extends DemoCustomField<Vehicle> {

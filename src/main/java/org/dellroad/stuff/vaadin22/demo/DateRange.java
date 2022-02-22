@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import javax.validation.ConstraintValidatorContext;
 import javax.validation.constraints.NotNull;
 
-import org.dellroad.stuff.vaadin22.fieldbuilder.FieldBuilder;
+import org.dellroad.stuff.vaadin22.field.FieldBuilder;
 import org.dellroad.stuff.validation.SelfValidates;
 import org.dellroad.stuff.validation.SelfValidating;
 import org.dellroad.stuff.validation.SelfValidationException;

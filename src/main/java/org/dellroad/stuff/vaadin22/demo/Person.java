@@ -6,10 +6,12 @@
 package org.dellroad.stuff.vaadin22.demo;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 import javax.validation.constraints.NotNull;
 
-import org.dellroad.stuff.vaadin22.fieldbuilder.FieldBuilder;
+import org.dellroad.stuff.vaadin22.data.EnumDataProvider;
+import org.dellroad.stuff.vaadin22.field.FieldBuilder;
 
 public class Person implements HasName {
 
@@ -17,6 +19,7 @@ public class Person implements HasName {
     private LocalDate birthDate;
     private Vehicle vehicle;
     private DateRange contract;
+    private Set<Country> favoriteCountries;
 
     @Override
     @FieldBuilder.FormLayout(order = 1)
@@ -48,6 +51,7 @@ public class Person implements HasName {
 
     @FieldBuilder.FormLayout(order = 4, label = "Term")
     @FieldBuilder.CustomField(implementation = DateRangeField.class)
+    @DateRangeField.Layout(direction = DateRangeField.Direction.VERTICAL)
     @NotNull(message = "Term is required")
     public DateRange getContract() {
         return this.contract;
@@ -56,11 +60,24 @@ public class Person implements HasName {
         this.contract = contract;
     }
 
+    @FieldBuilder.FormLayout(order = 2.5, label = "Favorite Countries")
+    @FieldBuilder.GridMultiSelect(
+      width = "300px",
+      height = "200px",
+      items = EnumDataProvider.class)
+    @NotNull(message = "Required")
+    public Set<Country> getFavoriteCountries() {
+        return this.favoriteCountries;
+    }
+    public void setFavoriteCountries(final Set<Country> favoriteCountries) {
+        this.favoriteCountries = favoriteCountries;
+    }
+
 // Object
 
     @Override
     public String toString() {
-        return String.format("Person[name=\"%s\",birthDate=%s,vehicle=%s,contract=%s]",
-          this.name, this.birthDate, this.vehicle, this.contract);
+        return String.format("Person[name=\"%s\",birthDate=%s,vehicle=%s,contract=%s,favoriteCountries=%s]",
+          this.name, this.birthDate, this.vehicle, this.contract, this.favoriteCountries);
     }
 }

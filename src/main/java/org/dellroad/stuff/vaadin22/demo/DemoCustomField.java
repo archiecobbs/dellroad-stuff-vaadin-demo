@@ -9,8 +9,8 @@ import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.ValidationResult;
 import com.vaadin.flow.data.binder.ValueContext;
 
-import org.dellroad.stuff.vaadin22.fieldbuilder.FieldBuilder;
-import org.dellroad.stuff.vaadin22.fieldbuilder.FieldBuilderCustomField;
+import org.dellroad.stuff.vaadin22.field.FieldBuilder;
+import org.dellroad.stuff.vaadin22.field.FieldBuilderCustomField;
 import org.dellroad.stuff.vaadin22.util.WholeBeanValidator;
 
 @SuppressWarnings("serial")
