@@ -10,6 +10,7 @@ import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.dependency.Uses;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.icon.Icon;
@@ -43,6 +44,25 @@ import org.springframework.beans.factory.annotation.Configurable;
 @PreserveOnRefresh
 @Route("")
 @SuppressWarnings("serial")
+@Uses(com.vaadin.flow.component.checkbox.Checkbox.class)                // https://github.com/vaadin/flow-components/issues/2902
+@Uses(com.vaadin.flow.component.checkbox.CheckboxGroup.class)           // https://github.com/vaadin/flow-components/issues/2902
+@Uses(com.vaadin.flow.component.combobox.ComboBox.class)                // https://github.com/vaadin/flow-components/issues/2902
+@Uses(com.vaadin.flow.component.customfield.CustomField.class)          // https://github.com/vaadin/flow-components/issues/2902
+@Uses(com.vaadin.flow.component.datepicker.DatePicker.class)            // https://github.com/vaadin/flow-components/issues/2902
+@Uses(com.vaadin.flow.component.datetimepicker.DateTimePicker.class)    // https://github.com/vaadin/flow-components/issues/2902
+@Uses(com.vaadin.flow.component.html.Input.class)                       // https://github.com/vaadin/flow-components/issues/2902
+@Uses(com.vaadin.flow.component.listbox.ListBox.class)                  // https://github.com/vaadin/flow-components/issues/2902
+@Uses(com.vaadin.flow.component.listbox.MultiSelectListBox.class)       // https://github.com/vaadin/flow-components/issues/2902
+@Uses(com.vaadin.flow.component.radiobutton.RadioButtonGroup.class)     // https://github.com/vaadin/flow-components/issues/2902
+@Uses(com.vaadin.flow.component.select.Select.class)                    // https://github.com/vaadin/flow-components/issues/2902
+@Uses(com.vaadin.flow.component.textfield.BigDecimalField.class)        // https://github.com/vaadin/flow-components/issues/2902
+@Uses(com.vaadin.flow.component.textfield.EmailField.class)             // https://github.com/vaadin/flow-components/issues/2902
+@Uses(com.vaadin.flow.component.textfield.IntegerField.class)           // https://github.com/vaadin/flow-components/issues/2902
+@Uses(com.vaadin.flow.component.textfield.NumberField.class)            // https://github.com/vaadin/flow-components/issues/2902
+@Uses(com.vaadin.flow.component.textfield.PasswordField.class)          // https://github.com/vaadin/flow-components/issues/2902
+@Uses(com.vaadin.flow.component.textfield.TextArea.class)               // https://github.com/vaadin/flow-components/issues/2902
+@Uses(com.vaadin.flow.component.textfield.TextField.class)              // https://github.com/vaadin/flow-components/issues/2902
+@Uses(com.vaadin.flow.component.timepicker.TimePicker.class)            // https://github.com/vaadin/flow-components/issues/2902
 public class DemoView extends VerticalLayout {
 
     protected final Logger log = LoggerFactory.getLogger(this.getClass());
