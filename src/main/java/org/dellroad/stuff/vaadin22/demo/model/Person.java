@@ -52,8 +52,9 @@ public class Person implements HasName {
         this.vehicle = vehicle;
     }
 
-    @FieldBuilder.FormLayout(order = 4, label = "Term")
+    @FieldBuilder.FormLayout(order = 4, label = "Vehicle Contract")
     @FieldBuilder.CustomField(implementation = DateRangeField.class)
+    @FieldBuilder.EnabledBy("vehicle")
     @DateRangeField.Layout(direction = DateRangeField.Direction.VERTICAL)
     @NotNull(message = "Term is required")
     public DateRange getContract() {
