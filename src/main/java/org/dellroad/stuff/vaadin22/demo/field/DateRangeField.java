@@ -3,13 +3,12 @@
  * Copyright (C) 2022 Archie L. Cobbs. All rights reserved.
  */
 
-package org.dellroad.stuff.vaadin22.demo;
+package org.dellroad.stuff.vaadin22.demo.field;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -18,6 +17,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.Optional;
 
+import org.dellroad.stuff.vaadin22.demo.model.DateRange;
 import org.dellroad.stuff.vaadin22.field.FieldBuilderContext;
 import org.dellroad.stuff.vaadin22.util.VaadinUtil;
 
@@ -50,8 +50,8 @@ public class DateRangeField extends DemoCustomField<DateRange> {
     protected void layoutComponents() {
 
         // Get sub-field components
-        final Component startDate = this.fieldBuilder.getBoundFields().get("startDate").getComponent();
-        final Component endDate = this.fieldBuilder.getBoundFields().get("endDate").getComponent();
+        final Component startDate = this.fieldBuilder.getFieldComponents().get("startDate").getComponent();
+        final Component endDate = this.fieldBuilder.getFieldComponents().get("endDate").getComponent();
 
         // Build sub-field layout
         final Component layout;

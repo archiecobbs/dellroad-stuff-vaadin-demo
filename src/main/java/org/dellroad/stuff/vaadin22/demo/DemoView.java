@@ -30,6 +30,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.dellroad.stuff.vaadin22.demo.context.SessionSingleton;
+import org.dellroad.stuff.vaadin22.demo.model.Person;
 import org.dellroad.stuff.vaadin22.field.FieldBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,7 +66,8 @@ public class DemoView extends VerticalLayout {
         // Build form
         final FormLayout formLayout = new FormLayout();
         formLayout.setResponsiveSteps(new FormLayout.ResponsiveStep("1px", 1, FormLayout.ResponsiveStep.LabelsPosition.ASIDE));
-        fieldBuilder.addBoundFields(formLayout);
+
+        fieldBuilder.addFieldComponents(formLayout);
         this.add(formLayout);
 
         // Add buttons

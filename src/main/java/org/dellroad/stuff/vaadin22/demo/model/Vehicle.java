@@ -3,11 +3,12 @@
  * Copyright (C) 2022 Archie L. Cobbs. All rights reserved.
  */
 
-package org.dellroad.stuff.vaadin22.demo;
+package org.dellroad.stuff.vaadin22.demo.model;
 
 import javax.validation.constraints.NotNull;
 
 import org.dellroad.stuff.vaadin22.data.EnumDataProvider;
+import org.dellroad.stuff.vaadin22.demo.field.DateRangeField;
 import org.dellroad.stuff.vaadin22.field.FieldBuilder;
 
 public class Vehicle implements HasName {

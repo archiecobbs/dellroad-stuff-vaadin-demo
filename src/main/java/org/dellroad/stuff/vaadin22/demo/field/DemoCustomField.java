@@ -3,12 +3,13 @@
  * Copyright (C) 2022 Archie L. Cobbs. All rights reserved.
  */
 
-package org.dellroad.stuff.vaadin22.demo;
+package org.dellroad.stuff.vaadin22.demo.field;
 
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.ValidationResult;
 import com.vaadin.flow.data.binder.ValueContext;
 
+import org.dellroad.stuff.vaadin22.demo.context.SessionSingleton;
 import org.dellroad.stuff.vaadin22.field.FieldBuilder;
 import org.dellroad.stuff.vaadin22.field.FieldBuilderCustomField;
 import org.dellroad.stuff.vaadin22.util.WholeBeanValidator;

@@ -21,9 +21,9 @@
     <context:spring-configured/>
 
     <!-- Define an application-wide "Springleton", which is required for the SimpleSpringServlet to find us -->
-    <bean id="springleton" class="org.dellroad.stuff.vaadin22.demo.Springleton"/>
+    <bean id="springleton" class="org.dellroad.stuff.vaadin22.demo.context.Springleton"/>
 
-    <!-- What-to-do-when-queue-full policy -->
+    <!-- What-to-do-when-queue-full policy for the executors below -->
     <bean id="rejectedExecutionAbort" class="java.util.concurrent.ThreadPoolExecutor.AbortPolicy"/>
 
     <!-- Define our task executor and scheduler -->

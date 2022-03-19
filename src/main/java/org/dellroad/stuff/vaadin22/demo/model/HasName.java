@@ -3,7 +3,7 @@
  * Copyright (C) 2022 Archie L. Cobbs. All rights reserved.
  */
 
-package org.dellroad.stuff.vaadin22.demo;
+package org.dellroad.stuff.vaadin22.demo.model;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;

@@ -3,7 +3,7 @@
  * Copyright (C) 2022 Archie L. Cobbs. All rights reserved.
  */
 
-package org.dellroad.stuff.vaadin22.demo;
+package org.dellroad.stuff.vaadin22.demo.model;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -11,6 +11,8 @@ import java.util.Set;
 import javax.validation.constraints.NotNull;
 
 import org.dellroad.stuff.vaadin22.data.EnumDataProvider;
+import org.dellroad.stuff.vaadin22.demo.field.DateRangeField;
+import org.dellroad.stuff.vaadin22.demo.field.VehicleField;
 import org.dellroad.stuff.vaadin22.field.FieldBuilder;
 
 public class Person implements HasName {
@@ -20,6 +22,7 @@ public class Person implements HasName {
     private Vehicle vehicle;
     private DateRange contract;
     private Set<Country> favoriteCountries;
+    private Set<Country> leastFavoriteCountries;
 
     @Override
     @FieldBuilder.FormLayout(order = 1)
@@ -61,6 +64,19 @@ public class Person implements HasName {
     }
 
     @FieldBuilder.FormLayout(order = 2.5, label = "Favorite Countries")
+    @FieldBuilder.MultiSelectListBox(
+      width = "300px",
+      height = "200px",
+      items = EnumDataProvider.class)
+    @NotNull(message = "Required")
+    public Set<Country> getLeastFavoriteCountries() {
+        return this.leastFavoriteCountries;
+    }
+    public void setLeastFavoriteCountries(final Set<Country> leastFavoriteCountries) {
+        this.leastFavoriteCountries = leastFavoriteCountries;
+    }
+
+    @FieldBuilder.FormLayout(order = 2.5, label = "Least Favorite Countries")
     @FieldBuilder.GridMultiSelect(
       width = "300px",
       height = "200px",
@@ -77,7 +93,8 @@ public class Person implements HasName {
 
     @Override
     public String toString() {
-        return String.format("Person[name=\"%s\",birthDate=%s,vehicle=%s,contract=%s,favoriteCountries=%s]",
-          this.name, this.birthDate, this.vehicle, this.contract, this.favoriteCountries);
+        return String.format(
+          "Person[name=\"%s\",birthDate=%s,vehicle=%s,contract=%s,favoriteCountries=%s,leastFavoriteCountries=%s]",
+          this.name, this.birthDate, this.vehicle, this.contract, this.favoriteCountries, this.leastFavoriteCountries);
     }
 }
