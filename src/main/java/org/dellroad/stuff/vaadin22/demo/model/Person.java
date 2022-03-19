@@ -35,7 +35,7 @@ public class Person implements HasName {
 
     @FieldBuilder.DatePicker
     @FieldBuilder.FormLayout(order = 2, label = "Birthday")
-    @FieldBuilder.NullifyCheckbox("Has birthday:")
+    @FieldBuilder.NullifyCheckbox(value = "Has birthday:", resetOnDisable = false)
     public LocalDate getBirthDate() {
         return this.birthDate;
     }
