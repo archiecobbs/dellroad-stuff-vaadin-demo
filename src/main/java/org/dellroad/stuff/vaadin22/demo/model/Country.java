@@ -18,9 +18,6 @@ import org.dellroad.stuff.vaadin22.field.FieldBuilder;
 public enum Country {
     FRANCE("fr", "France"),
     GERMANY("de", "Germany"),
-    GREECE("gr", "Greece"),
-    ITALY("it", "Italy"),
-    NEW_ZEALAND("nz", "New Zealand"),
     SPAIN("es", "Spain"),
     UNITED_KINGDOM("gb", "UK"),
     UNITED_STATES("us", "USA");
