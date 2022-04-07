@@ -12,22 +12,35 @@ import com.vaadin.flow.data.binder.ValueContext;
 import org.dellroad.stuff.vaadin22.demo.context.SessionSingleton;
 import org.dellroad.stuff.vaadin22.field.FieldBuilder;
 import org.dellroad.stuff.vaadin22.field.FieldBuilderCustomField;
+import org.dellroad.stuff.vaadin22.util.VaadinUtil;
 import org.dellroad.stuff.vaadin22.util.WholeBeanValidator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 
+@Configurable
 @SuppressWarnings("serial")
 public class DemoCustomField<T> extends FieldBuilderCustomField<T> {
 
     private final WholeBeanValidator beanValidator;
+
+    @Autowired
+    private SessionSingleton sessionSingleton;
 
     public DemoCustomField(Class<T> modelType) {
         super(modelType);
         this.beanValidator = new WholeBeanValidator(this.modelType);
     }
 
-    // Use our FieldBuilder cache for efficiency
+    // Defer initialization to avoid NPE in createFieldBuilder()
+    @Override
+    protected void initialize() {
+        VaadinUtil.accessSession(() -> super.initialize());
+    }
+
+    // Use our per-VaadinSession FieldBuilder cache for efficiency
     @Override
     protected FieldBuilder<T> createFieldBuilder() {
-        return SessionSingleton.getInstance().newFieldBuilder(this.modelType);
+        return this.sessionSingleton.newFieldBuilder(this.modelType);
     }
 
     // Enable JSR 303 bean validation for PROPERTIES of the bean in the INNER binder

@@ -31,6 +31,11 @@
       p:corePoolSize="16" p:maxPoolSize="32" p:queueCapacity="10000" p:rejectedExecutionHandler-ref="rejectedExecutionAbort"/>
     <bean id="taskScheduler" class="org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler" p:poolSize="8"/>
 
+    <!-- Define the various Vaadin-related Spring scopes provided by vaadin-spring -->
+    <bean class="com.vaadin.flow.spring.scopes.VaadinSessionScope"/>
+    <bean class="com.vaadin.flow.spring.scopes.VaadinUIScope"/>
+    <bean class="com.vaadin.flow.spring.scopes.VaadinRouteScope"/>
+
     <!-- Substitute ${properties.like.this} in this application context -->
     <context:property-placeholder location="classpath:demo.properties"/>
 
