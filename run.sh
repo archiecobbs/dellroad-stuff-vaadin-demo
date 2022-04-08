@@ -2,7 +2,7 @@
 
 set -e
 
-mvn -P fast package
+mvn -P fast clean package
 
 WEBAPP_NAME='demo'
 

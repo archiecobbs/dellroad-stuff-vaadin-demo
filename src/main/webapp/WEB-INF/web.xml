@@ -9,17 +9,7 @@
     <description>DellRoad Stuff Demo</description>
 
     <!-- See https://cwiki.apache.org/confluence/display/TOMCAT/Character+Encoding -->
-<!--
-    <filter>
-        <filter-name>characterEncodingFilter</filter-name>
-        <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
-        <async-supported>true</async-supported>
-        <init-param>
-            <param-name>encoding</param-name>
-            <param-value>UTF-8</param-value>
-        </init-param>
-    </filter>
--->
+    <request-character-encoding>UTF-8</request-character-encoding>
 
     <!-- Listener that sets ${demo.wardir} system property -->
     <listener>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+<!--
+    Define our appenders (i.e., rolling log files)
+-->
+
+    <!-- ${demo.log.dir}/error.log -->
+    <appender name="errorlog" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="${demo.log.dir}/error.log"/>
+        <param name="Threshold" value="warn"/>
+        <param name="MaxBackupIndex" value="5"/>
+        <param name="MaxFileSize" value="1MB"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{ISO8601} [%t] %-5p: %m%n"/>
+        </layout>
+    </appender>
+
+    <!-- ${demo.log.dir}/demo.log -->
+    <appender name="log" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="${demo.log.dir}/demo.log"/>
+        <param name="Threshold" value="trace"/>
+        <param name="MaxBackupIndex" value="5"/>
+        <param name="MaxFileSize" value="1MB"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{ISO8601} [%t] %-5p: %m%n"/>
+        </layout>
+    </appender>
+
+<!--
+    Set log level filters for various libraries
+-->
+
+    <logger name="org.hibernate.validator">
+        <level value="warn"/>
+    </logger>
+
+    <logger name="org.springframework">
+        <level value="info"/>
+    </logger>
+
+    <logger name="com.vaadin.flow.server.communication.UidlWriter">
+        <level value="info"/>
+    </logger>
+
+<!--
+    Configure default behavior
+-->
+
+    <root>
+        <appender-ref ref="errorlog"/>
+        <appender-ref ref="log"/>
+    </root>
+
+</log4j:configuration>

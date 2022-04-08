@@ -37,8 +37,8 @@
         <checkstyle.config.location>src/checkstyle/checkstyle.xml</checkstyle.config.location>
 
         <!-- Dependency versions -->
-        <aspectj.maven-plugin.version>1.11</aspectj.maven-plugin.version>
-        <aspectj.version>[1.8.13,1.9)</aspectj.version>
+        <aspectj.maven-plugin.version>1.14.0</aspectj.maven-plugin.version>
+        <aspectj.version>1.9.7</aspectj.version>
         <dellroad-stuff.version>2.5.0-SNAPSHOT</dellroad-stuff.version>
         <guava.version>31.1-jre</guava.version>
         <hibernate-validator.version>6.2.2.Final</hibernate-validator.version>
@@ -57,7 +57,7 @@
         <vaadin.plugin.version>${vaadin.version}</vaadin.plugin.version>
         <vaadin.version.major>22</vaadin.version.major>
         <vaadin.version.minor>0</vaadin.version.minor>
-        <vaadin.version.patch>5</vaadin.version.patch>
+        <vaadin.version.patch>10</vaadin.version.patch>
         <vaadin.version>${vaadin.version.major}.${vaadin.version.minor}.${vaadin.version.patch}</vaadin.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
 
@@ -78,31 +78,12 @@
 
     <dependencies>
 
-        <!-- Vaadin -->
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-core</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.vaadin</groupId>
-                    <artifactId>fusion-endpoint</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.vaadin</groupId>
-                    <artifactId>vaadin-dev-server</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>flow-server-production-mode</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-spring</artifactId>
-        </dependency>
-
         <!-- Spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
@@ -127,6 +108,30 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+
+        <!-- Vaadin -->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-core</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.vaadin</groupId>
+                    <artifactId>fusion-endpoint</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.vaadin</groupId>
+                    <artifactId>vaadin-dev-server</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>flow-server-production-mode</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-spring</artifactId>
         </dependency>
 
         <!-- Servlet API -->
@@ -195,6 +200,8 @@
             <artifactId>guava</artifactId>
             <version>${guava.version}</version>
         </dependency>
+
+        <!-- AspectJ -->
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
@@ -351,6 +358,7 @@
                 <executions>
                     <execution>
                         <id>compile_and_weave_aspects</id>
+                        <phase>process-classes</phase>
                         <goals>
                             <goal>compile</goal>
                         </goals>

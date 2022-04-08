@@ -14,7 +14,6 @@ import java.util.HashMap;
 import org.dellroad.stuff.vaadin22.field.FieldBuilder;
 import org.dellroad.stuff.vaadin22.util.VaadinUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.scheduling.TaskScheduler;
@@ -69,20 +68,5 @@ public class SessionSingleton {
         VaadinUtil.assertCurrentSession(this.session);
         final FieldBuilder<T> template = (FieldBuilder<T>)this.fieldBuilderMap.computeIfAbsent(modelType, FieldBuilder::new);
         return new FieldBuilder<>(template);
-    }
-
-    /**
-     * Get the singleton associated with the current {@link VaadinSession}.
-     *
-     * @throws IllegalStateException if there is no {@link VaadinSession} associated with the current thread
-     */
-    public static SessionSingleton getInstance() {
-        VaadinUtil.assertCurrentSession();
-        @Configurable
-        class Accessor {
-            @Autowired
-            SessionSingleton sessionSingleton;
-        }
-        return new Accessor().sessionSingleton;
     }
 }
