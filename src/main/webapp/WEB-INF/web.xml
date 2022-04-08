@@ -22,7 +22,6 @@
 -->
 
     <!-- Listener that sets ${demo.wardir} system property -->
-<!--
     <listener>
         <listener-class>org.springframework.web.util.WebAppRootListener</listener-class>
     </listener>
@@ -30,17 +29,14 @@
         <param-name>webAppRootKey</param-name>
         <param-value>demo.wardir</param-value>
     </context-param>
--->
 
     <!-- Cleanup listeners -->
-<!--
     <listener>
         <listener-class>org.dellroad.stuff.servlet.ContextCleanupListener</listener-class>
     </listener>
     <listener>
         <listener-class>org.springframework.web.context.ContextCleanupListener</listener-class>
     </listener>
--->
 
     <!-- Spring context loader -->
     <listener>
