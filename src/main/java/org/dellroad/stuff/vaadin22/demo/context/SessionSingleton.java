@@ -9,6 +9,7 @@ import com.google.common.base.Preconditions;
 import com.vaadin.flow.server.VaadinSession;
 import com.vaadin.flow.spring.scopes.VaadinSessionScope;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 import org.dellroad.stuff.vaadin22.field.FieldBuilder;
@@ -24,7 +25,9 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Scope(VaadinSessionScope.VAADIN_SESSION_SCOPE_NAME)
-public class SessionSingleton {
+public class SessionSingleton implements Serializable {
+
+    private static final long serialVersionUID = 3089469530946138711L;
 
     private final VaadinSession session = VaadinUtil.getCurrentSession();
     private final HashMap<Class<?>, FieldBuilder<?>> fieldBuilderMap = new HashMap<>();
