@@ -34,7 +34,7 @@ public class DemoCustomField<T> extends FieldBuilderCustomField<T> {
     // Defer initialization to avoid NPE in createFieldBuilder()
     @Override
     protected void initialize() {
-        VaadinUtil.accessSession(() -> super.initialize());
+        VaadinUtil.accessCurrentSession(() -> super.initialize());
     }
 
     // Use our per-VaadinSession FieldBuilder cache for efficiency

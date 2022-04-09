@@ -42,7 +42,7 @@ public class DateRangeField extends DemoCustomField<DateRange> {
     // Avoid constructor ordering issue
     @Override
     protected void initialize() {
-        VaadinUtil.accessSession(() -> super.initialize());
+        VaadinUtil.accessCurrentSession(() -> super.initialize());
     }
 
     // Customize how we layout the sub-fields
