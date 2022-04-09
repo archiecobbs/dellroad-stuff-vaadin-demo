@@ -40,6 +40,7 @@
         <aspectj.maven-plugin.version>1.14.0</aspectj.maven-plugin.version>
         <aspectj.version>1.9.7</aspectj.version>
         <dellroad-stuff.version>2.5.0-SNAPSHOT</dellroad-stuff.version>
+        <extra.enforcer.rules.version>1.5.1</extra.enforcer.rules.version>
         <guava.version>31.1-jre</guava.version>
         <hibernate-validator.version>6.2.2.Final</hibernate-validator.version>
         <javax.el.version>3.0.1-b11</javax.el.version>
@@ -47,7 +48,7 @@
         <log4j.version>1.2.17</log4j.version>
         <maven.checkstyle.plugin.version>3.0.0</maven.checkstyle.plugin.version>
         <maven.compiler.plugin.version>3.7.0</maven.compiler.plugin.version>
-        <maven.enforcer.plugin.version>3.0.0-M1</maven.enforcer.plugin.version>
+        <maven.enforcer.plugin.version>3.0.0</maven.enforcer.plugin.version>
         <maven.javadoc.plugin.version>3.0.0</maven.javadoc.plugin.version>
         <maven.resources.plugin.version>3.2.0</maven.resources.plugin.version>
         <maven.war.plugin.version>3.3.2</maven.war.plugin.version>
@@ -59,7 +60,6 @@
         <vaadin.version.minor>0</vaadin.version.minor>
         <vaadin.version.patch>10</vaadin.version.patch>
         <vaadin.version>${vaadin.version.major}.${vaadin.version.minor}.${vaadin.version.patch}</vaadin.version>
-        <validation-api.version>2.0.1.Final</validation-api.version>
 
     </properties>
 
@@ -98,6 +98,13 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
             <version>${spring.version}</version>
+            <exclusions>
+                <exclusion>
+                    <!-- Conflicts with commons-logging dependency of hibernate-validator, httpclient -->
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-jcl</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -123,6 +130,11 @@
                     <groupId>com.vaadin</groupId>
                     <artifactId>vaadin-dev-server</artifactId>
                 </exclusion>
+                <exclusion>
+                    <!-- Conflicts with jakarta.validation:jakarta.validation-api dependency of hibernate-validator -->
+                    <groupId>javax.validation</groupId>
+                    <artifactId>validation-api</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
@@ -144,11 +156,6 @@
 
         <!-- Validation -->
         <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>${validation-api.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>${hibernate-validator.version}</version>
@@ -169,12 +176,6 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-reload4j</artifactId>
             <version>${slf4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>${log4j.version}</version>
-            <scope>runtime</scope>
         </dependency>
 
         <!-- DellRoad Stuff -->
@@ -199,13 +200,6 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>${guava.version}</version>
-        </dependency>
-
-        <!-- AspectJ -->
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjrt</artifactId>
-            <version>${aspectj.version}</version>
         </dependency>
 
     </dependencies>
@@ -252,6 +246,13 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
                 <version>${maven.enforcer.plugin.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>extra-enforcer-rules</artifactId>
+                        <version>${extra.enforcer.rules.version}</version>
+                    </dependency>
+                </dependencies>
                 <executions>
                     <execution>
                         <id>maven_enforcer</id>
@@ -276,6 +277,12 @@
                                 <!-- Check for dependency conflicts -->
                                 <!-- <dependencyConvergence/> -->
                                 <banDuplicatePomDependencyVersions/>
+
+                                <!-- Check same class appearing more than once and not identically -->
+                                <banDuplicateClasses>
+                                    <findAllDuplicates>true</findAllDuplicates>
+                                    <ignoreWhenIdentical>true</ignoreWhenIdentical>
+                                </banDuplicateClasses>
 
                                 <!-- Other rules -->
                                 <reactorModuleConvergence/>
